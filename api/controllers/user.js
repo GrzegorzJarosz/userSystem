@@ -47,8 +47,22 @@ exports.user_create = (req, res, next)  => {
 
 
 /*----------------------------------------------------------------------------*/
-//
-exports.user_get_by_id = ()  => {};
+//get user by id
+exports.user_get_by_id = (req, res, next)  => {
+  return User.find({
+    include: [{
+      model: Group,
+      as: 'groups',
+      attributes: ['name'],
+      through:{
+        attributes: []
+      }
+    }],
+    attributes:['name', 'password', 'firstName', 'lastName', 'birthDate'],
+    where:{id: req.params.userId}
+  }).then(user => res.status(200).send(user))
+  .catch(err => res.status(500).send(err));
+};
 
 /*----------------------------------------------------------------------------*/
 //update user

@@ -37,7 +37,22 @@ exports.group_create = (req, res, next)  => {
 };
 
 /*----------------------------------------------------------------------------*/
-exports.group_get_by_id = ()  => {};
+//get group by id
+exports.group_get_by_id = (req, res, next)  => {
+  return Group.find({
+    include: [{
+      model: User,
+      as: 'users',
+      attributes: ['name'],
+      through:{
+        attributes: []
+      }
+    }],
+    attributes:['name'],
+    where:{id: req.params.groupId}
+  }).then(group => res.status(200).send(group))
+  .catch(err => res.status(500).send(err));
+};
 
 /*----------------------------------------------------------------------------*/
 exports.group_update = ()  => {};
