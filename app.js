@@ -5,7 +5,9 @@ const morgan = require('morgan');
 
 const app = express();
 
-//---->***routes***
+//routes
+const userRoutes = require('./api/routes/users');
+const groupRoutes = require('./api/routes/groups');
 
 //set port
 const port = process.env.PORT || 3000;
@@ -20,7 +22,9 @@ app.use(bodyParser.json());
 //static
 app.use(express.static(path.join(__dirname, 'public')));
 
-//------>***use routes***
+//use routes
+app.use('/users', userRoutes);
+app.use('/groups', groupRoutes);
 
 //index route
 app.get('/', (req,res) => {
