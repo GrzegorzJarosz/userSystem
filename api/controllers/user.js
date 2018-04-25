@@ -57,4 +57,18 @@ exports.user_update = ()  => {};
 
 /*----------------------------------------------------------------------------*/
 //delete user
-exports.user_delete = ()  => {};
+exports.user_delete = (req, res, next)  => {
+  return User
+  .find({
+    where: {
+      id: req.params.userId
+    }
+  })
+  .then( user => {
+    if(!user){ return res.status(404).json({message:'user not found'}); }
+    return user.destroy()
+    .then(() => res. status(200).json({message: 'user deleted'}))
+    .catch((err) => res.status(500).send(err));
+  })
+  .catch(err => res.status(400).send(err));
+};

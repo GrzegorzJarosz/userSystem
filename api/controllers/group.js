@@ -43,4 +43,19 @@ exports.group_get_by_id = ()  => {};
 exports.group_update = ()  => {};
 
 /*----------------------------------------------------------------------------*/
-exports.group_delete = ()  => {};
+//delete group
+exports.group_delete = (req, res, next)  => {
+  return Group
+  .find({
+    where: {
+      id: req.params.groupId
+    }
+  })
+  .then( group => {
+    if(!group){ return res.status(404).json({message:'group not found'}); }
+    return group.destroy()
+    .then(() => res. status(200).json({message: 'group deleted'}))
+    .catch((err) => res.status(500).send(err));
+  })
+  .catch(err => res.status(400).send(err));
+};
