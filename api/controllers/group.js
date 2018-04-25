@@ -5,7 +5,20 @@ const Group = require('../models/group');
 
 /*----------------------------------------------------------------------------*/
 //get all groups
-exports.group_get_all = (req, res, next)  => {};
+exports.group_get_all = (req, res, next)  => {
+  return Group.findAll({
+    include: [{
+      model: User,
+      as: 'users',
+      attributes: ['name'],
+      through:{
+        attributes: []
+      }
+    }],
+    attributes:['name']
+  }).then(group => res.status(200).send(group))
+  .catch(err => res.status(500).send(err));
+};
 
 /*----------------------------------------------------------------------------*/
 //create new group

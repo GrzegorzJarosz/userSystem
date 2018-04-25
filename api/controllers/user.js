@@ -8,7 +8,20 @@ const Subscription = require('../models/subscription');
 
 /*----------------------------------------------------------------------------*/
 //get all users
-exports.user_get_all = ()  => {};
+exports.user_get_all = (req, res, next)  => {
+  return User.findAll({
+    include: [{
+      model: Group,
+      as: 'groups',
+      attributes: ['name'],
+      through:{
+        attributes: []
+      }
+    }],
+    attributes:['name', 'password', 'firstName', 'lastName', 'birthDate']
+  }).then(user => res.status(200).send(user))
+  .catch(err => res.status(500).send(err));
+};
 
 /*----------------------------------------------------------------------------*/
 //create new user
