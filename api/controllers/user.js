@@ -12,7 +12,25 @@ exports.user_get_all = ()  => {};
 
 /*----------------------------------------------------------------------------*/
 //create new user
-exports.user_create = ()  => {};
+exports.user_create = (req, res, next)  => {
+  const newUser = {
+      name: req.body.name,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      birthDate:  req.body.birthDate
+  };
+  User.create(newUser)
+  .then(user => {
+      console.log('user created');
+      res.status(200).send(newUser);
+    })
+  .catch(er => {
+    console.log(er);
+    res.status(500).json({message:er});
+  });
+
+};
 
 
 /*----------------------------------------------------------------------------*/
