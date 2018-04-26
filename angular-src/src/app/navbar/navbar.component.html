@@ -1,3 +1,19 @@
-<p>
-  navbar works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">UserSystem</a>
+  <button class="navbar-toggler" type="button" (click)="navToggler()" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse" [ngClass]="{collapse : navOpen}">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/home']" [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" (click)="navToggler()">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/users']" [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" (click)="navToggler()">Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/groups']" [routerLinkActiveOptions]="{exact:true}" [routerLinkActive]="['active']" (click)="navToggler()">Groups</a>
+      </li>
+    </ul>
+  </div>
+</nav>
