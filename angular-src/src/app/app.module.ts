@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
 import { UserModule } from './user/user.module';
 import { GroupModule } from './group/group.module';
 
@@ -24,6 +24,7 @@ const appRoutes:Routes = [
     BrowserModule,
     UserModule,
     GroupModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

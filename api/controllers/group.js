@@ -15,7 +15,7 @@ exports.group_get_all = (req, res, next)  => {
         attributes: []
       }
     }],
-    attributes:['name']
+    attributes:['id', 'name']
   }).then(group => res.status(200).send(group))
   .catch(err => res.status(500).send(err));
 };
@@ -48,7 +48,7 @@ exports.group_get_by_id = (req, res, next)  => {
         attributes: []
       }
     }],
-    attributes:['name'],
+    attributes:['id', 'name'],
     where:{id: req.params.groupId}
   }).then(group => res.status(200).send(group))
   .catch(err => res.status(500).send(err));
