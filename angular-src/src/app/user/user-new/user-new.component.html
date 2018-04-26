@@ -1,3 +1,43 @@
-<p>
-  user-new works!
-</p>
+<h2>Add new user</h2>
+<div>
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+    <div class="form-group">
+      <label>Name</label><br>
+      <input type="text" class="form-control" formControlName="name" placeholder="name">
+    </div>
+    <div class="form-group">
+      <label>First Name</label><br>
+      <input type="text"  class="form-control" formControlName="firstName" placeholder="first name">
+    </div>
+    <div class="form-group">
+      <label>Last Name</label><br>
+      <input type="text"  class="form-control" formControlName="lastName" placeholder="last name">
+    </div>
+    <div class="form-group">
+      <label>Password</label><br>
+      <input type="text"  class="form-control" formControlName="password" placeholder="password">
+    </div>
+    <div class="form-group">
+      <label>Birth Date</label><br>
+      <input type="text"  class="form-control" formControlName="birthDate" placeholder="yyyy-mm-dd">
+    </div>
+    <div class="form-group">
+      <div class="" formArrayName="groups" >
+        <div *ngFor="let group of getGroup(myForm); let i = index">
+          <div>
+            <span class="" *ngIf="myForm.controls.groups.controls.length > 1" (click)="removeGroup(i)"><i class="far fa-times-circle red-but"></i></span>
+            <label>Group {{i + 1}}</label>
+          </div>
+          <div [formGroupName]="i">
+            <app-new-helper  [group]="myForm.controls.groups.controls[i]"></app-new-helper>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-secondary mb-4" (click)="addGroup()">Add group</button>
+    <div class="mb-2">
+      <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Submit</button>
+      <button class="btn btn-primary" [routerLink]="['/users']">Cancel</button>
+    </div>
+  </form>
+</div>

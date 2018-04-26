@@ -28,7 +28,12 @@ export class UserService {
   //get user by id
   getUserById(id:number | string):Observable<User>{
     return this.http.get<User>(`${this.userUrl}users/${id}`);
-}
+  }
+
+  //Add new User
+  addNewUser(user):Observable<User>{
+    return this.http.post<User>(`${this.userUrl}users`, user, httpOptions);
+  }
 
 
 }

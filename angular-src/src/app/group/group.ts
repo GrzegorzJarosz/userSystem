@@ -1,9 +1,9 @@
-export interface User{
+export interface Group{
   id: number;
   name: string;
-  users: Array<UserNm>;
+  users: Array<GroupNm>;
 }
 
- interface UserNm{
+ interface GroupNm{
   name:string;
 }

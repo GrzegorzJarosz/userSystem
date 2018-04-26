@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user';
 
@@ -7,7 +7,7 @@ import { User } from '../user';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
 
   users: User[];
 
@@ -18,5 +18,9 @@ export class UserListComponent implements OnInit {
       this.users = users;
     });
   }
+  ngOnDestroy(){
+    this.users = null;
+  }
+
 
 }
