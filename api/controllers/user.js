@@ -18,7 +18,7 @@ exports.user_get_all = (req, res, next)  => {
         attributes: []
       }
     }],
-    attributes:['name', 'password', 'firstName', 'lastName', 'birthDate']
+    attributes:['id', 'name', 'password', 'firstName', 'lastName', 'birthDate']
   }).then(user => res.status(200).send(user))
   .catch(err => res.status(500).send(err));
 };
@@ -42,9 +42,7 @@ exports.user_create = (req, res, next)  => {
     console.log(er);
     res.status(500).json({message:er});
   });
-
 };
-
 
 /*----------------------------------------------------------------------------*/
 //get user by id
@@ -66,8 +64,7 @@ exports.user_get_by_id = (req, res, next)  => {
 
 /*----------------------------------------------------------------------------*/
 //update user
-exports.user_update = ()  => {};
-
+exports.user_update = (req, res, next)  => {};
 
 /*----------------------------------------------------------------------------*/
 //delete user

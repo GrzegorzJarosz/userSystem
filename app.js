@@ -27,7 +27,7 @@ app.use('/users', userRoutes);
 app.use('/groups', groupRoutes);
 
 //index route
-app.get('/', (req,res) => {
+app.get('*', (req,res) => {
   res.send('hello, try /users or /groups endpoint');
 });
 
