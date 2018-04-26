@@ -22,8 +22,13 @@ export class UserService {
 
   //get all users
   getAllUsers():Observable<User[]>{
-    return this.http.get<User[]>(this.userUrl+'users')
+    return this.http.get<User[]>(`${this.userUrl}users`)
   }
+
+  //get user by id
+  getUserById(id:number | string):Observable<User>{
+    return this.http.get<User>(`${this.userUrl}users/${id}`);
+}
 
 
 }

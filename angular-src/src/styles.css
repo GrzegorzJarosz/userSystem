@@ -2,3 +2,13 @@
 
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/bootswatch/dist/cosmo/bootstrap.min.css';
+
+.user-list-detail{
+  cursor:pointer;
+}
+.m-t-5{
+  margin: 5px 0;
+}
+.m-t-25{
+  margin: 25px 0;
+}

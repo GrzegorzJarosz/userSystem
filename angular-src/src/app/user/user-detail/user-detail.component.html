@@ -1,3 +1,16 @@
-<p>
-  user-detail works!
-</p>
+
+<div class="card mb-3" *ngIf="user">
+  <div class="card-header">User details - id: {{user.id}}</div>
+  <div class="card-body">
+    <h5 class="card-title mb-4 text-primary" >{{user.name}}</h5>
+    <hr>
+    <p class="card-text">first Name: <span class="text-primary">{{user.firstName}}</span></p>
+    <p class="card-text">last Name: <span class="text-primary">{{user.lastName}}</span></p>
+    <p class="card-text">password: <span class="text-primary">{{user.password}}</span></p>
+    <p class="card-text">birth Date: <span class="text-primary">{{user.birthDate | date}}</span></p>
+    <p class="card-text">groups: <span *ngIf="user.groups.length==0" class="text-primary">no groups</span></p>
+    <p class="ml-3" *ngFor="let group of user.groups"><span class="text-primary">{{group.name}}</span></p>
+    <hr>
+    <button type="button" class="btn btn-primary mt-2">Edit</button>
+  </div>
+</div>
