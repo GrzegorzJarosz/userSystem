@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class GroupService {
 
-  private groupUrl = 'http://localhost:3000/';
+  private groupUrl = 'http://localhost:3000/api/';
 
   constructor(private http: HttpClient) { }
 

@@ -27,12 +27,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //use routes
-app.use('/users', userRoutes);
-app.use('/groups', groupRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/groups', groupRoutes);
 
 //index route
 app.get('*', (req,res) => {
-  res.send('hello, try /users or /groups endpoint');
+  res.sendFile(path.join(__dirname,'public/index.html'));
 });
 
 app.listen(port, () => {

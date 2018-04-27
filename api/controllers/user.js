@@ -45,7 +45,6 @@ exports.user_create = (req, res, next)  => {
       });
     })
     .catch((er)=>res.status(404).send(er));
-      //console.log('user created');
     })
   .catch(er => {
     console.log(er);
