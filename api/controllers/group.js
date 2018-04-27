@@ -55,7 +55,28 @@ exports.group_get_by_id = (req, res, next)  => {
 };
 
 /*----------------------------------------------------------------------------*/
-exports.group_update = ()  => {};
+//update group
+exports.group_update = (req, res, next)  => {
+
+  const users = (req.body.users).map(el => el.name);
+  return Group.find({where:{id:req.params.groupId}})
+  .then((group)=>{
+    return group.update({
+      name: req.body.name || user.name
+    }).then((updatedGroup) =>{
+      User.findAll({where:{name:users}})
+      .then((users) => {
+        group.setUsers(users).then((a)=>{res.status(200).send(a)})
+        .catch(er =>{
+          console.log(er);
+          res.status(500).json({message:er});
+        })
+      })
+      .catch((err) => res.status(500).send(err));
+    })
+    .catch(er => res.status(500).send(er));
+    }).catch(er => res.status(404).send(er));
+};
 
 /*----------------------------------------------------------------------------*/
 //delete group

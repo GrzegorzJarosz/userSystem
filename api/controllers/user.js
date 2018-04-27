@@ -93,7 +93,8 @@ exports.user_update = (req, res, next)  => {
      .then((updatedUser) => {
        Group.findAll({where:{name:groups}})
        .then((groups)=>{
-         user.setGroups(groups).then((a)=>{res.status(200).send(a)}).catch(er => {
+         user.setGroups(groups).then((a)=>{res.status(200).send(a)})
+         .catch(er => {
            console.log(er);
            res.status(500).json({message:er});
          });
