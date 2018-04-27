@@ -1,3 +1,14 @@
-<p>
-  group-new works!
-</p>
+<div>
+  <h2>Add new Group</h2>
+  <hr>
+  <div class="mt-5">
+    <div class="form-group">
+      <label>Name</label><br>
+      <input type="text" class="form-control" [(ngModel)]="name" placeholder="name">
+    </div>
+    <div class="mb-2">
+      <button class="btn btn-primary" type="submit" (click)="addGroup()">Submit</button>
+      <button class="btn btn-danger" [routerLink]="['/groups']">Cancel</button>
+    </div>
+  </div>
+</div>

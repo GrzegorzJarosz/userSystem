@@ -1,3 +1,13 @@
-<p>
-  group-list works!
-</p>
+<div class="">
+  <button type="button" class="btn btn-outline-primary" [routerLink]="['/groups/addnew']"><i class="fas fa-plus mr-2"></i>Add new group</button>
+</div>
+
+<div class="mt-4">
+  <div class="card mb-1" *ngFor="let group of groups" >
+    <div class="card-body user-list-detail d-flex">
+      <span class="mr-auto align-self-center"><i class="fas fa-users"></i> {{group.name | uppercase}}</span>
+      <span class="mr-1"><button type="button" class="btn btn-primary" [routerLink]="['/groups/', group.id]">Details</button></span>
+      <span class="mr-1"><button type="button" class="btn btn-danger" (click)="deleteGroup(group.id)" >Delete</button></span>
+    </div>
+  </div>
+</div>

@@ -16,9 +16,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  //error handlig
-  //
-  //
+
 
   //get all users
   getAllUsers():Observable<User[]>{
@@ -30,12 +28,12 @@ export class UserService {
     return this.http.get<User>(`${this.userUrl}users/${id}`);
   }
 
-  //add new User
+  //add new user
   addNewUser(user):Observable<User>{
     return this.http.post<User>(`${this.userUrl}users`, user, httpOptions);
   }
 
-  //update User
+  //update user
   updateUser(user){
     return this.http.patch<User>(`${this.userUrl}users/${user.id}`, JSON.stringify(user), httpOptions);
   }

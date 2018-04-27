@@ -1,3 +1,12 @@
-<p>
-  group-detail works!
-</p>
+<div class="card mb-3" *ngIf="group">
+  <div class="card-header">Group details - id: {{group.id}}</div>
+  <div class="card-body">
+    <h5 class="card-title mb-4 text-primary" >{{group.name}}</h5>
+    <hr>
+
+    <p class="card-text">users: <span *ngIf="group.users.length==0" class="text-primary">no users</span></p>
+    <p class="ml-3" *ngFor="let user of group.users"><span class="text-primary">{{user.name}}</span></p>
+    <hr>
+    <button type="button" class="btn btn-primary mt-2" [routerLink]="['/groups/edit', group.id]">Edit</button>
+  </div>
+</div>
