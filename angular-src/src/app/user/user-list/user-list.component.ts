@@ -18,6 +18,18 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.users = users;
     });
   }
+
+  deleteUser(id){
+    this.userService.deleteUser(id).subscribe(
+      ()=>{
+        this.userService.getAllUsers().subscribe((users)=>{
+          this.users = users;
+        });
+      }
+    );
+  }
+
+
   ngOnDestroy(){
     this.users = null;
   }

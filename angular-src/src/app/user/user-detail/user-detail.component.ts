@@ -26,6 +26,4 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-    getUserById
-
 }

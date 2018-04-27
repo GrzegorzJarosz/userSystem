@@ -7,7 +7,7 @@
     <div class="card-body user-list-detail d-flex">
       <span class="mr-auto align-self-center"><i class="fas fa-user"></i> {{user.name | uppercase}}</span>
       <span class="mr-1"><button type="button" class="btn btn-primary" [routerLink]="['/users/', user.id]">Details</button></span>
-      <span class="mr-1"><button type="button" class="btn btn-danger">Delete</button></span>
+      <span class="mr-1"><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)" >Delete</button></span>
     </div>
   </div>
 </div>

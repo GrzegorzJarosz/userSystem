@@ -37,7 +37,7 @@
     <button type="button" class="btn btn-outline-secondary mb-4" (click)="addGroup()">Add group</button>
     <div class="mb-2">
       <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Submit</button>
-      <button class="btn btn-primary" [routerLink]="['/users']">Cancel</button>
+      <button class="btn btn-danger" [routerLink]="['/users']">Cancel</button>
     </div>
   </form>
 </div>

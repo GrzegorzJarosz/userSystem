@@ -12,6 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.Component';
 
 const appRoutes:Routes = [
+  {path:'', component: HomeComponent},
   {path:'home', component: HomeComponent}
 ];
 

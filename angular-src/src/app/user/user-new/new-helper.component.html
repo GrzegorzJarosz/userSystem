@@ -1,6 +1,7 @@
 <div [formGroup]="groupForm">
   <div class="form-group">
     <select class="form-control" formControlName="name">
+      <option value="------"></option>
       <option *ngFor="let group of groups">{{group.name}}</option>
     </select>
   </div>

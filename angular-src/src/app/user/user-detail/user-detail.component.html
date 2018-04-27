@@ -11,6 +11,6 @@
     <p class="card-text">groups: <span *ngIf="user.groups.length==0" class="text-primary">no groups</span></p>
     <p class="ml-3" *ngFor="let group of user.groups"><span class="text-primary">{{group.name}}</span></p>
     <hr>
-    <button type="button" class="btn btn-primary mt-2">Edit</button>
+    <button type="button" class="btn btn-primary mt-2" [routerLink]="['/users/edit', user.id]">Edit</button>
   </div>
 </div>

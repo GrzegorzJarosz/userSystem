@@ -33,10 +33,19 @@ exports.user_create = (req, res, next)  => {
       lastName: req.body.lastName,
       birthDate:  req.body.birthDate
   };
+  const groups = (req.body.groups).map(el => el.name);
   User.create(newUser)
-  .then(user => {
-      console.log('user created');
-      res.status(200).send(newUser);
+  .then((user) => {
+
+    Group.findAll({where:{name:groups}})
+    .then((groups)=>{
+      user.setGroups(groups).then(()=>{res.status(200).send(newUser)}).catch(er => {
+        console.log(er);
+        res.status(500).json({message:er});
+      });
+    })
+    .catch((er)=>res.status(404).send(er));
+      //console.log('user created');
     })
   .catch(er => {
     console.log(er);
@@ -64,7 +73,38 @@ exports.user_get_by_id = (req, res, next)  => {
 
 /*----------------------------------------------------------------------------*/
 //update user
-exports.user_update = (req, res, next)  => {};
+exports.user_update = (req, res, next)  => {
+
+  const groups = (req.body.groups).map(el => el.name);
+  return User.find({
+    where: {
+    id: req.params.userId
+  }})
+   .then((user)=>{
+     if(!user){ return res.status(404).json({message:'user not found'}); }
+
+     return user.update({
+       name: req.body.name || user.name,
+       password: req.body.password || user.password,
+       firstName: req.body.firstName || user.firstName,
+       lastName: req.body.lastName || user.lastName,
+       birthDate: req.body.birthDate || user.birthDate
+     })
+     .then((updatedUser) => {
+       Group.findAll({where:{name:groups}})
+       .then((groups)=>{
+         user.setGroups(groups).then((a)=>{res.status(200).send(a)}).catch(er => {
+           console.log(er);
+           res.status(500).json({message:er});
+         });
+     })
+     .catch((err) => res.status(500).send(err));
+     })
+     .catch((er)=>res.status(404).send(er));
+   }).catch((er)=>{
+     res.status(500).send(er)
+ });
+};
 
 /*----------------------------------------------------------------------------*/
 //delete user

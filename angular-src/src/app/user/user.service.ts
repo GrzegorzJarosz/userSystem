@@ -30,10 +30,19 @@ export class UserService {
     return this.http.get<User>(`${this.userUrl}users/${id}`);
   }
 
-  //Add new User
+  //add new User
   addNewUser(user):Observable<User>{
     return this.http.post<User>(`${this.userUrl}users`, user, httpOptions);
   }
 
+  //update User
+  updateUser(user){
+    return this.http.patch<User>(`${this.userUrl}users/${user.id}`, JSON.stringify(user), httpOptions);
+  }
+
+  //delete user
+  deleteUser(id){
+    return this.http.delete(`${this.userUrl}users/${id}`, httpOptions);
+  }
 
 }
