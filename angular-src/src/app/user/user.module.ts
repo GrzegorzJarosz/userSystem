@@ -7,7 +7,6 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserService } from './user.service';
 import { UserNewComponent } from './user-new/user-new.component';
-import { NewHelperComponent } from './user-new/new-helper.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
@@ -15,7 +14,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     CommonModule,FormsModule,ReactiveFormsModule,
     UserRoutingModule
   ],
-  declarations: [UserDetailComponent, UserListComponent, UserNewComponent, NewHelperComponent, UserEditComponent],
+  declarations: [UserDetailComponent, UserListComponent, UserNewComponent, UserEditComponent],
   providers:[UserService]
 })
 export class UserModule { }

@@ -1,1 +1,8 @@
 .red-but{color: red;}
+.list-group-item, i{
+  cursor:pointer;
+}
+i{
+  cursor:pointer;
+  font-size: 24px;
+}

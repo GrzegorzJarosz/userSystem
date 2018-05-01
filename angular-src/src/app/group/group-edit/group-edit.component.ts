@@ -42,20 +42,24 @@ export class GroupEditComponent implements OnInit {
 
   addUser(){
     this.userToTakeOpt= !this.userToTakeOpt;
+    //actualiz array of users to take
+    this.group.users.forEach((elA)=>{
+      this.usersToTake = this.usersToTake.filter((elB)=>{
+        if(elA.name == elB.name){return false} else {return true};
+      });
+    });
   }
 
   removeUser(gName){
     let todel = this.group.users.map(e=>e.name).indexOf(gName);
     this.group.users.splice(todel,1);
-    console.log(todel);
+    //actualiz array of users to take
+    this.usersToTake.push({name:gName});
   }
 
   updateGroup(group){
-    console.log(group);
     this.groupService.updateGroup(group).subscribe((res)=>{this.router.navigate(['/groups'])});
   }
-
-
 
 
 }

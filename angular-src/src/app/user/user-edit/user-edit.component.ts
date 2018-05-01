@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../user.service';
 import { GroupService } from '../../group/group.service';
@@ -28,6 +29,7 @@ export class UserEditComponent implements OnInit {
     this.currentUrl= this.route.snapshot.params;
     this.userService.getUserById(this.currentUrl.id).subscribe((user)=>{
       this.user = user;
+
     });
     this.groupService.getAllGroups().subscribe((groups)=>{
       this.groupsToTake = groups;
@@ -41,16 +43,22 @@ export class UserEditComponent implements OnInit {
 
   addGroup(){
     this.groupToTakeOpt= !this.groupToTakeOpt;
+    //actualiz array of groups to take
+    this.user.groups.forEach((elA)=>{
+      this.groupsToTake = this.groupsToTake.filter((elB)=>{
+        if(elA.name == elB.name){return false} else {return true};
+      });
+    });
   }
 
   removeGroup(gName){
     let todel = this.user.groups.map(e=>e.name).indexOf(gName);
     this.user.groups.splice(todel,1);
-    //console.log(todel);
+    //actualiz array of groups to take
+    this.groupsToTake.push({name:gName});
   }
 
   updateUser(user){
-    console.log(user);
     this.userService.updateUser(user).subscribe((res)=>{this.router.navigate(['/users'])});
   }
 

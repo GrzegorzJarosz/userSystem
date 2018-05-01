@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService} from '../user.service';
 import { GroupService } from '../../group/group.service';
@@ -14,7 +13,7 @@ import { Group } from '../../group/group';
 export class UserNewComponent implements OnInit {
 
   groupsToTake;
-	public myForm: FormGroup;
+  groupsToTakeOpt: boolean = false;
   name: string;
 	firstName: string;
 	lastName: string;
@@ -25,61 +24,52 @@ export class UserNewComponent implements OnInit {
   constructor(
     private service: UserService,
     private groupService: GroupService,
-		private fb: FormBuilder,
-		private router: Router) { }
+		private router: Router
+  ) { }
 
-    ngOnInit() {
-      this.groupService.getAllGroups().subscribe((groups)=>{
-        this.groupsToTake = groups;
-      });
-
-      this.myForm = this.fb.group({
-        name: ['', [Validators.required]],
-        firstName: ['', [Validators.required]],
-        lastName: ['', [Validators.required]],
-        password: ['', [Validators.required]],
-        birthDate: ['', [Validators.required]],
-        groups: this.fb.array([])
-      });
-
-      this.addGroup()
-  }
-
-  initGroup() {
-     return this.fb.group({
-        name: ['', Validators.required]  // =groupname
-     });
-  }
-
-  addGroup() {
-    const control = <FormArray>this.myForm.controls['groups'];
-    const addrCtrl = this.initGroup();
-    control.push(addrCtrl);
-  }
-
-  getGroup(myForm){
-    return myForm.get('groups').controls;
-  };
-
-  removeGroup(i: number) {
-     const control = <FormArray>this.myForm.controls['groups'];
-     control.removeAt(i);
-  }
-
-  save(model) {
-    const newUser = {
-      name: model.value.name,
-      firstName: model.value.firstName,
-      lastName: model.value.lastName,
-      password: model.value.password,
-      birthDate: model.value.birthDate,
-      groups: model.value.groups
-    };
-
-    this.service.addNewUser(newUser).subscribe(data => {
-      this.router.navigate(['/users']);
+  ngOnInit() {
+    this.groupService.getAllGroups().subscribe((groups)=>{
+      this.groupsToTake = groups;
+      //console.log(this.groupsToTake)
     });
   }
 
+
+  addGroup() {
+    this.groupsToTakeOpt = !this.groupsToTakeOpt;
+  }
+
+  addToSelectedGroups(name){
+    this.addGroup();
+    this.groups.push({name:name});
+    let todel = this.groupsToTake.map(e => e.name).indexOf(name);
+    this.groupsToTake.splice(todel,1);
+  }
+
+  getGroup(myForm){  }
+
+
+  removeGroup(gName) {
+    let todel = this.groups.map(e => e.name).indexOf(gName);
+    this.groups.splice(todel,1);
+    this.groupsToTake.push({name:gName});
+  }
+
+  //save() {
+  onSubmit(valid){
+    if (!valid) {return false}
+    const newUser = {
+      name: this.name,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      password: this.password,
+      birthDate: this.birthDate,
+      groups: this.groups
+    };
+
+    this.service.addNewUser(newUser).subscribe(data => {
+    this.router.navigate(['/users']);
+    });
+  }
 
 }

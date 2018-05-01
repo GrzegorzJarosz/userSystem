@@ -16,16 +16,31 @@ export class GroupService {
 
   constructor(private http: HttpClient) { }
 
-
+  //error handling
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error code ${error.status}, ` +
+        `body: ${error.error}`);
+    }
+    return new ErrorObservable(
+      'Something went wrong, please try again later.');
+  };
 
   //get all groups
   getAllGroups():Observable<Group[]>{
-    return this.http.get<Group[]>(`${this.groupUrl}groups`)
+    return this.http.get<Group[]>(`${this.groupUrl}groups`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   //get group by id
   getGroupById(id:number | string):Observable<Group>{
-    return this.http.get<Group>(`${this.groupUrl}groups/${id}`);
+    return this.http.get<Group>(`${this.groupUrl}groups/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
   //add new group
