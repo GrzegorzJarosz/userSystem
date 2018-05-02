@@ -1,0 +1,25 @@
+.confirmator-container{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  /* top:-100%; */
+  transition:0.5s all ease-in-out;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.confirmator{
+  position: relative;
+  max-width: 50%;
+  z-index: 200;
+  top:20vh;
+  box-shadow: 0 0 20px #000;
+  text-align: center;
+
+}
+
+@media (max-width: 540px){
+  .confirmator{
+    max-width: 90%;
+  }
+}

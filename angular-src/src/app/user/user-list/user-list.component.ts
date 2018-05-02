@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../user.service';
+import { ConfirmService } from '../../confirm/confirm.service';
 import { User } from '../user';
 
 @Component({
@@ -11,22 +12,27 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   users: User[];
 
-  constructor( private userService: UserService ) { }
+  constructor(
+    private userService: UserService,
+    private confirmService: ConfirmService
+  ) { }
 
   ngOnInit() {
-    this.userService.getAllUsers().subscribe((users)=>{
+    this.userService.getAllUsers().subscribe((users) => {
       this.users = users;
     });
   }
 
   deleteUser(id){
-    this.userService.deleteUser(id).subscribe(
-      ()=>{
-        this.userService.getAllUsers().subscribe((users)=>{
-          this.users = users;
+    this.confirmService.confirm().then((res) => {
+      if(res === true){
+        this.userService.deleteUser(id).subscribe(() => {
+          this.userService.getAllUsers().subscribe((users) => {
+            this.users = users;
+          });
         });
-      }
-    );
+      }else{return}
+    });
   }
 
 

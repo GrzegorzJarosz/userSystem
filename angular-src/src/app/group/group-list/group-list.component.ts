@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GroupService } from '../group.service';
+import { ConfirmService } from '../../confirm/confirm.service';
 import { Group } from '../group';
 
 @Component({
@@ -11,22 +12,30 @@ export class GroupListComponent implements OnInit, OnDestroy {
 
   groups: Group[];
 
-  constructor( private groupService :GroupService) { }
+  constructor(
+    private groupService: GroupService,
+    private confirmService: ConfirmService
+  ) { }
 
   ngOnInit() {
-    this.groupService.getAllGroups().subscribe((groups)=>{
+    this.groupService.getAllGroups().subscribe((groups) => {
       this.groups = groups;
     });
   }
 
   deleteGroup(id){
-    this.groupService.deleteGroup(id).subscribe(
-      ()=>{
-        this.groupService.getAllGroups().subscribe((groups)=>{
-          this.groups = groups;
+    this.confirmService.confirm().then((res) => {
+      if(res === true){
+        this.groupService.deleteGroup(id).subscribe(() => {
+          this.groupService.getAllGroups().subscribe((groups) => {
+            this.groups = groups;
+          });
         });
-      }
-    );
+      }else{return}
+    });
+
+
+
   }
 
   ngOnDestroy(){
