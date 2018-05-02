@@ -7,7 +7,7 @@
     <div class="card-body user-list-detail d-flex">
       <span class="mr-auto align-self-center"><i class="fas fa-users"></i> {{group.name | uppercase}}</span>
       <span class="mr-1"><button type="button" class="btn btn-primary" [routerLink]="['/groups/', group.id]">Details</button></span>
-      <span class="mr-1"><button type="button" class="btn btn-danger" (click)="deleteGroup(group.id)" >Delete</button></span>
+      <span class="mr-1"><button type="button" class="btn btn-danger" (click)="deleteGroup(group.id, group.name)" >Delete</button></span>
     </div>
   </div>
 </div>

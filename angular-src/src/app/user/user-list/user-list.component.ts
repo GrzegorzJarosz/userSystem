@@ -23,8 +23,8 @@ export class UserListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteUser(id){
-    this.confirmService.confirm().then((res) => {
+  deleteUser(id, name){
+    this.confirmService.confirm(name).then((res) => {
       if(res === true){
         this.userService.deleteUser(id).subscribe(() => {
           this.userService.getAllUsers().subscribe((users) => {

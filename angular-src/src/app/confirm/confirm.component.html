@@ -1,10 +1,10 @@
-<div class="confirmator-container" *ngIf="confOpened">
+<div class="confirmator-container" *ngIf="confOpened.open">
   <div class="confirmator card mx-auto" >
     <div class="card-header bg-primary">
       <h4>Are you sure?</h4>
     </div>
     <div class="card-body">
-      <p class="card-text">Warning - this cannot be undone</p>
+      <p class="card-text">{{confOpened.msg}}</p>
       <div class="d-flex justify-content-center">
         <button class="btn btn-primary mr-1" (click)="onAnswer(true)">ok</button>
         <button class="btn btn-danger ml-1" (click)="onAnswer(false)">Cancel</button>

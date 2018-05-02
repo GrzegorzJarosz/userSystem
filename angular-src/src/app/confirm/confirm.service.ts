@@ -6,16 +6,25 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class ConfirmService {
 
   answerEmiter = new Subject();
-  openConfirm = new BehaviorSubject(false);
-  
+  openConfirm = new BehaviorSubject({
+    open:false,
+    msg:''
+  });
+
   constructor() { }
 
-  confirm() {
-    this.openConfirm.next(true);
+  confirm(name) {
+    this.openConfirm.next({
+      open:true,
+      msg:'Do you really want to delete '+name+'?'}
+    );
     return new Promise((resolve, reject) => {
       this.answerEmiter.subscribe((resp)=>{
         resolve(resp);
-        this.openConfirm.next(false);
+        this.openConfirm.next({
+          open:false,
+          msg:''
+        });
       });
     });
   }

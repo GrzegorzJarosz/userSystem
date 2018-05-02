@@ -8,7 +8,10 @@ import { ConfirmService } from './confirm.service';
 })
 export class ConfirmComponent implements OnInit {
 
-  confOpened = false;
+  confOpened = {
+    open:false,
+    msg:''
+  };
 
   constructor(private confirmService: ConfirmService) { }
 

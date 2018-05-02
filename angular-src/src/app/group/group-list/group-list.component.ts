@@ -23,8 +23,8 @@ export class GroupListComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteGroup(id){
-    this.confirmService.confirm().then((res) => {
+  deleteGroup(id, name){
+    this.confirmService.confirm(name).then((res) => {
       if(res === true){
         this.groupService.deleteGroup(id).subscribe(() => {
           this.groupService.getAllGroups().subscribe((groups) => {

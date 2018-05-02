@@ -29,7 +29,7 @@
 
       <div class="form-group d-flex" *ngFor="let group of user.groups; let i= index" >
         <label class="mr-auto align-self-center"><i class="far fa-times-circle red-but ml-2 pt-2" (click)=removeGroup(group.name)></i></label><br>
-        <input type="text" value="{{group.name}}" class="form-control ml-2" [(ngModel)]="user.groups[i].name" placeholder="group">
+        <input disabled type="text" value="{{group.name}}" class="form-control ml-2" [(ngModel)]="user.groups[i].name" placeholder="group">
       </div>
 
       <div class="mb-3" *ngIf="groupsToTake && groupToTakeOpt">

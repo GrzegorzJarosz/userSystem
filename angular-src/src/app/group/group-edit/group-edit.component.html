@@ -13,7 +13,7 @@
 
     <div class="form-group d-flex" *ngFor="let user of group.users; let i= index" >
       <label class="mr-auto align-self-center"><i class="far fa-times-circle red-but ml-2 pt-2" (click)=removeUser(user.name)></i></label><br>
-      <input type="text" value="{{user.name}}" class="form-control ml-2" [(ngModel)]="group.users[i].name" placeholder="user">
+      <input disabled type="text" value="{{user.name}}" class="form-control ml-2" [(ngModel)]="group.users[i].name" placeholder="user">
     </div>
 
     <div class="mb-3" *ngIf="usersToTake && userToTakeOpt">
